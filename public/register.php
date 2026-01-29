@@ -11,30 +11,51 @@
 <body class="font-roboto">
     <?php
     require "../auth/register.php";
-
-    foreach ($errors as $key => $err) {
-        echo "$err <br>";
-    }
-
+    // echo "<ul class='text-red-500 text-xs italic'>";
+    // foreach ($errors as $key => $err) {
+    //     echo "<li>$err </li>";
+    // }
+    // echo "</ul>";
+    
     ?>
-    <p class="font-semibold text-2xl mb-4">Register</p>
-    <form method="post">
-        <div class="input-box mb-4">
-            <input type="email" name="email" class="border rounded-xs border-black" placeholder="E-mail Address">
-        </div>
-        <div class="input-box mb-4">
-            <input type="password" name="password" class="border rounded-xs border-black" placeholder="Password">
-        </div>
-        <div class="input-box mb-4">
-            <input type="password" name="conf_password" class="border rounded-xs border-black"
-                placeholder="Confirm Password">
-            <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
-        </div>
-        <div class="input-box">
-            <button type="submit" class="border px-4 py-1 rounded-2xl">Register</button>
-        </div>
-    </form>
-    <a href="login.php">Login</a>
+    <div class="w-full max-w-xs mx-auto">
+        <p class="font-semibold text-2xl my-5 py-5 text-center">Register</p>
+        <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="input-box mb-5">
+                <input type="email" name="email"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="E-mail Address">
+            </div>
+            <div class="input-box mb-5">
+                <input type="password" name="password"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Password" autocomplete="password">
+            </div>
+            <div class="input-box mb-5">
+                <input type="password" name="conf_password"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Confirm Password" autocomplete="conf_password">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+            </div>
+            <div class="input-box">
+                <div class="flex items-center justify-between">
+                    <button type="submit"
+                        class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</button>
+                    <a href="login.php"
+                        class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Login</a>
+                </div>
+            </div>
+        </form>
+        <?php if ($errors): ?>
+            <ul class='text-red-500 text-xs italic p-2 border border-red-500'>
+                <?php foreach ($errors as $err): ?>
+                    <li><?= htmlspecialchars(string: $err) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <?= "" ?>
+        <?php endif; ?>
+    </div>
 </body>
 
 </html>

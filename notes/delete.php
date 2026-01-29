@@ -1,23 +1,24 @@
-<?php 
+<?php
 
 require "../config/db.php";
-require "../middleware/auth.php";
+session_start();
 
-$note_id = $_GET["id"] ?? null;
-
-if(!$note_id){
-die("Note note found");
+if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+    die("Invalid Request");
 }
 
+$notes_id = $_GET["id"];
 
-$stmt = $pdo -> prepare("SELECT * from notes WHERE id=? AND user_id=?");
-$stmt -> execute([$note_id,$_SESSION["user_id"]]);
-$note = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$notes_id) {
+    die("Note not found");
+}
 
-echo "<pre>";
-print_r($note);
-echo "</pre>";
+$stmt = $pdo->prepare("DELETE FROM notes WHERE id = ? AND user_id=?");
+$stmt->execute([$notes_id, $_SESSION["user_id"]]);
+$data = $stmt->fetch(PDO::FETCH_ASSOC);
 
+header("Location: ../public/dashboard.php");
+exit;
 
 
 
