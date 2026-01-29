@@ -27,7 +27,8 @@
             <div class="task-box border">
                 <p><?= htmlspecialchars($note["title"]) ?></p>
                 <p><?= htmlspecialchars($note["content"]) ?></p>
-                <a href="edit-note.php?<?= $note['id'] ?>" class="underline text-green-400">Edit</a>
+                <a href="edit-note.php?id=<?= $note['id'] ?>" class="underline text-green-400">Edit</a>
+                <a href="delete-note.php?id=<?= $note['id'] ?>" class="underline text-red-400">Delete</a>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

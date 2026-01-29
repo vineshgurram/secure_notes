@@ -5,13 +5,13 @@ session_start();
 
 $errors = [];
 
-if (empty($_SESSION["crsf_token"])) {
-    $_SESSION["crsf_token"] = bin2hex(random_bytes(32));
+if (empty($_SESSION["csrf_token"])) {
+    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    if (!isset($_POST["crsf_token"]) || !hash_equals($_SESSION["crsf_token"], $_POST["crsf_token"])) {
+    if (!isset($_POST["csrf_token"]) || !hash_equals($_SESSION["csrf_token"], $_POST["csrf_token"])) {
         die("Invalid CSRF token");
     }
     

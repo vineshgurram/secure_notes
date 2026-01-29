@@ -15,6 +15,7 @@
     foreach ($errors as $key => $err) {
         echo "$err <br>";
     }
+
     ?>
     <p class="font-semibold text-2xl mb-4">Register</p>
     <form method="post">
@@ -33,6 +34,7 @@
             <button type="submit" class="border px-4 py-1 rounded-2xl">Register</button>
         </div>
     </form>
+    <a href="login.php">Login</a>
 </body>
 
 </html>
