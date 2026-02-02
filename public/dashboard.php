@@ -1,3 +1,6 @@
+<?php
+require "../auth/dashboard.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +12,6 @@
 </head>
 
 <body class="font-roboto">
-    <?php
-
-    require "../middleware/auth.php";
-    require "../auth/dashboard.php";
-
-    ?>
     <div class="container mx-auto px-5 py-5 my-5">
         <p class="font-semibold text-2xl mb-4">Dashboard</p>
         <div class="flex justify-between mb-5">
@@ -48,9 +45,9 @@
             </div>
         </div>
         <div class="mb-5">
-            <a href="create-note.php" class="underline text-yellow-400">
-                <svg viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg" fill="#000000" style="font-size:20px;width:20px">
+            <a href="create-note.php" class="underline text-yellow-400 inline-block">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"
+                    style="font-size:20px;width:20px">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -65,15 +62,15 @@
                 </svg></a>
         </div>
         <?php if (count($notes) === 0): ?>
-            <p class="text-md font-bold text-green-500">No notes yet</p>
+            <p class="text-md font-bold text-green-500 p-4 border text-center">No notes yet</p>
         <?php else: ?>
             <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <?php foreach ($notes as $note): ?>
                     <div
                         class="task-box w-full h-64 flex flex-col justify-between items-start bg-blue-300 rounded-lg border border-blue-300 mb-6 py-5 px-4">
                         <div>
-                            <h3 class="text-gray-800 font-bold mb-3"><?= htmlspecialchars($note["title"]) ?></h3>
-                            <p class="text-gray-800 text-sm"><?= htmlspecialchars($note["content"]) ?></p>
+                            <h3 class="text-gray-800 font-bold mb-3 line-clamp-2"><?= htmlspecialchars($note["title"]) ?></h3>
+                            <p class="text-gray-800 text-sm line-clamp-5"><?= htmlspecialchars($note["content"]) ?></p>
                         </div>
                         <div class="flex justify-between align-middle w-full flex-nowrap">
                             <p class="text-sm flex-auto"><?= $note["created_at"] ?></p>

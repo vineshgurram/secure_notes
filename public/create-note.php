@@ -11,14 +11,15 @@
     require "../notes/create.php";
     
     ?>
-    <div class="w-full max-w-xs mx-auto py-5 my-5">
+    <div class="w-full max-w-md mx-auto py-5 my-5">
         <p class="font-semibold text-2xl mb-5 text-center">Create Notes</p>
         <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div class="input-box mb-4" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <input type="text" name="title" placeholder="Title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
             <div class="input-box mb-4">
-                <textarea name="content" placeholder="Content" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                <textarea name="content" rows="12" placeholder="Content" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
             </div>
             <div class="input-box">
                 <button type="submit" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create</button>

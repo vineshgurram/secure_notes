@@ -1,15 +1,8 @@
 <?php
-
-require "../config/db.php";
-
-session_start();
+require "../middleware/bootstrap.php";
 
 $email = "";
 $errors = [];
-
-if (empty($_SESSION["csrf_token"])) {
-    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
-}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (
@@ -31,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Invalid Email";
     }
 
+
     if (empty($errors)) {
         $stmt = $pdo->prepare("SELECT * FROM  users WHERE email = ? LIMIT 1");
         $stmt->execute([$email]);
@@ -39,11 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!$user || !password_verify($password, $user["password"])) {
             $errors[] = "Invalid email or password";
         } else {
-            // echo "Correct Password";
             session_regenerate_id(true);
-            $errors[] = "Wrong Password";
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["user_email"] = $user["email"];
+            // echo $_SESSION["user_email"];
             header("Location: ../public/dashboard.php");
             exit;
         }

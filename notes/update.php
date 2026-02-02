@@ -1,6 +1,7 @@
 <?php
 
-require "../config/db.php";
+// require "../config/db.php";
+require "../middleware/bootstrap.php";
 require "../middleware/auth.php";
 
 // session_start();

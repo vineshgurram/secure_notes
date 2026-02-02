@@ -1,13 +1,15 @@
 <?php
 
 require "../config/db.php";
-session_start();
+require "../middleware/bootstrap.php";
+
+// session_start();
 
 $errors = [];
 
-if (empty($_SESSION["csrf_token"])) {
-    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
-}
+// if (empty($_SESSION["csrf_token"])) {
+//     $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+// }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
