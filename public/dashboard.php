@@ -61,11 +61,11 @@ require "../auth/dashboard.php";
                     </g>
                 </svg></a>
         </div>
-        <?php if (count($notes) === 0): ?>
+        <?php if (count($fetch_notes) === 0): ?>
             <p class="text-md font-bold text-green-500 p-4 border text-center">No notes yet</p>
         <?php else: ?>
-            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <?php foreach ($notes as $note): ?>
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <?php foreach ($fetch_notes as $note): ?>
                     <div
                         class="task-box w-full h-64 flex flex-col justify-between items-start bg-blue-300 rounded-lg border border-blue-300 mb-6 py-5 px-4">
                         <div>
@@ -84,7 +84,29 @@ require "../auth/dashboard.php";
                                         <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
                                         <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
                                     </svg></a>
-                                <a href="delete-note.php?id=<?= $note['id'] ?>"
+
+                                <form action="../notes/delete.php" method="post" onsubmit="return confirm('Are you sure you want to delete ??')">
+                                    <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                                    <input type="hidden" name="note_id" value="<?= $note['id'] ?>">
+                                    <button type="submit" class="w-8 h-8 rounded-full bg-gray-800 text-white inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-pink-300   focus:ring-black cursor-pointer">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 6.98996C8.81444 4.87965 15.1856 4.87965 21 6.98996" stroke="#fff"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M8.00977 5.71997C8.00977 4.6591 8.43119 3.64175 9.18134 2.8916C9.93148 2.14146 10.9489 1.71997 12.0098 1.71997C13.0706 1.71997 14.0881 2.14146 14.8382 2.8916C15.5883 3.64175 16.0098 4.6591 16.0098 5.71997"
+                                                stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M12 13V18" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M19 9.98999L18.33 17.99C18.2225 19.071 17.7225 20.0751 16.9246 20.8123C16.1266 21.5494 15.0861 21.9684 14 21.99H10C8.91389 21.9684 7.87336 21.5494 7.07541 20.8123C6.27745 20.0751 5.77745 19.071 5.67001 17.99L5 9.98999"
+                                                stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                </form>
+                                <!-- <a href="delete-note.php?id=<?= $note['id'] ?>"
                                     class="w-8 h-8 rounded-full bg-gray-800 text-white inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-pink-300   focus:ring-black">
 
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -99,12 +121,43 @@ require "../auth/dashboard.php";
                                         <path
                                             d="M19 9.98999L18.33 17.99C18.2225 19.071 17.7225 20.0751 16.9246 20.8123C16.1266 21.5494 15.0861 21.9684 14 21.99H10C8.91389 21.9684 7.87336 21.5494 7.07541 20.8123C6.27745 20.0751 5.77745 19.071 5.67001 17.99L5 9.98999"
                                             stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg></a>
+                                    </svg></a> -->
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            <div class="pagination flex items-center justify-center gap-1">
+                <!-- Previous -->
+                <?php if ($page > 1): ?>
+                    <a href="?page=<?= $page - 1 ?>" class="px-3 py-1 border">
+                        Prev
+                    </a>
+                <?php else: ?>
+                    <span class="px-3 py-1 border text-gray-400 cursor-not-allowed">
+                        Prev
+                    </span>
+                <?php endif; ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?= $i ?>"
+                        class="inline-block leading-[1] p-2 border <?= $i == $page ? 'active' : '' ?>">
+
+                        <?= $i ?>
+                    </a>
+                <?php endfor; ?>
+                <!-- Next -->
+                <?php if ($page < $totalPages): ?>
+                    <a href="?page=<?= $page + 1 ?>" class="px-3 py-1 border">
+                        Next
+                    </a>
+                <?php else: ?>
+                    <span class="px-3 py-1 border text-gray-400 cursor-not-allowed">
+                        Next
+                    </span>
+                <?php endif; ?>
+            </div>
+
         <?php endif; ?>
     </div>
 </body>
