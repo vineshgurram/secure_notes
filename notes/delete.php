@@ -23,7 +23,7 @@ $notes_id = (int) ($_POST["note_id"] ?? 0);
 $user_id = $_SESSION["user_id"];
 
 if (!$notes_id) {
-    die("Note not found");
+    die("Notes not found");
 }
 
 /* Ownership check */
