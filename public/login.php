@@ -13,7 +13,7 @@ require "../auth/login.php";
 
 <body class="font-roboto">
     <div class="w-full max-w-xs mx-auto">
-        <p class="font-semibold text-2xl my-5 py-5 text-center">Login to account</p>
+        <p class="font-semibold text-2xl my-5 py-5 text-center">Login to Account</p>
         <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
             <div class="input-box mb-4">

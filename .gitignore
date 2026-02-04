@@ -1,1 +1,6 @@
-node_modules
+.env
+config.local.php
+/vendor/
+/node_modules/
+/.idea/
+/.vscode/
