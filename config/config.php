@@ -20,4 +20,5 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     $dbname = getenv('DB_NAME');
     $user = getenv('DB_USER');
     $pass = getenv('DB_PASS');
+    
 }
